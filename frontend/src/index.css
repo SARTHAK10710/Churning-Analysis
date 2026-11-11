@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --canvas: 248 250 252;
+    --card: 255 255 255;
+    --subtle: 241 245 249;
+    --line: 226 232 240;
+    --line-strong: 203 213 225;
+    --ink: 15 23 42;
+    --body: 51 65 85;
+    --muted: 100 116 139;
+    --faint: 148 163 184;
+    --brand-soft: 238 242 255;
+    --brand-text: 67 56 202;
+    color-scheme: light;
+  }
+  .dark {
+    --canvas: 9 13 24;
+    --card: 17 24 39;
+    --subtle: 30 41 59;
+    --line: 39 50 71;
+    --line-strong: 61 75 99;
+    --ink: 241 245 249;
+    --body: 203 213 225;
+    --muted: 148 163 184;
+    --faint: 100 116 139;
+    --brand-soft: 30 27 75;
+    --brand-text: 165 180 252;
+    color-scheme: dark;
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-canvas font-sans text-body-md text-body;
+    font-feature-settings: 'cv11';
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand/40 ring-offset-1 ring-offset-canvas;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-line bg-card shadow-card;
+  }
+  .label-caps {
+    @apply text-caps uppercase text-muted;
+  }
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+  .input {
+    @apply h-9 w-full rounded-lg border border-line bg-card px-3 text-ink transition placeholder:text-faint focus:border-brand focus:outline-none focus:ring-[3px] focus:ring-brand/15;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-1.5 text-body-md font-medium transition disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-white shadow-card hover:bg-brand-strong active:scale-[0.99];
+  }
+  .btn-secondary {
+    @apply btn border border-line bg-card text-ink hover:border-line-strong hover:bg-subtle;
+  }
+  .btn-ghost {
+    @apply btn text-muted hover:bg-subtle hover:text-ink;
+  }
+
+  /* Range slider per DESIGN.md: 6px track, indigo fill, 18px white thumb. */
+  .range {
+    @apply h-1.5 w-full cursor-pointer appearance-none rounded-full;
+    background: linear-gradient(to right, #4f46e5 var(--fill, 50%), rgb(var(--line)) var(--fill, 50%));
+  }
+  .range::-webkit-slider-thumb {
+    @apply h-[18px] w-[18px] appearance-none rounded-full border border-line-strong bg-white transition-transform active:scale-110;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
+  }
+  .range::-moz-range-thumb {
+    @apply h-[18px] w-[18px] rounded-full border border-line-strong bg-white;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.2);
+  }
+}
